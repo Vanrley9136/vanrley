@@ -114,6 +114,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
     });
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const skillsItems = document.querySelectorAll(".skills-item");
     const options = {

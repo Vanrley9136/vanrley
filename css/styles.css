@@ -2302,3 +2302,11 @@ textarea.form-input::-webkit-resizer {
   }
 }
 
+
+.no-projects {
+  text-align: center;
+  color: #ffffff;
+  font-size: 24px;
+  padding: 20px;
+  display: none;
+}

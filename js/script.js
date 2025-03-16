@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); };
 
@@ -36,6 +36,8 @@ const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
 const selectValue = document.querySelector("[data-selecct-value]");
 const filterBtn = document.querySelectorAll("[data-filter-btn]");
+const projectList = document.querySelector(".project-list");
+const noProjects = document.querySelector(".no-projects");
 
 select.addEventListener("click", function () { elementToggleFunc(this); });
 
@@ -51,7 +53,7 @@ for (let i = 0; i < selectItems.length; i++) {
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
 const filterFunc = function (selectedValue) {
-    console.log("Filtrando por:", selectedValue); // Depuração
+    let hasVisibleProjects = false;
     for (let i = 0; i < filterItems.length; i++) {
         if (selectedValue === "todos" || selectedValue === "all") {
             filterItems[i].classList.add("active");
@@ -60,7 +62,12 @@ const filterFunc = function (selectedValue) {
         } else {
             filterItems[i].classList.remove("active");
         }
+        if (filterItems[i].classList.contains("active")) {
+            hasVisibleProjects = true;
+        }
     }
+    // Exibe a mensagem se não houver projetos visíveis
+    noProjects.style.display = hasVisibleProjects ? "none" : "block";
 };
 
 let lastClickedBtn = filterBtn[0];
@@ -114,7 +121,6 @@ for (let i = 0; i < navigationLinks.length; i++) {
     });
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const skillsItems = document.querySelectorAll(".skills-item");
     const options = {
@@ -133,6 +139,17 @@ document.addEventListener("DOMContentLoaded", function () {
     skillsItems.forEach(item => {
         observer.observe(item);
     });
+
+    // Verifica se há projetos visíveis ao carregar a página
+    const filterItems = document.querySelectorAll("[data-filter-item]");
+    let hasVisibleProjects = false;
+    for (let i = 0; i < filterItems.length; i++) {
+        if (filterItems[i].classList.contains("active")) {
+            hasVisibleProjects = true;
+            break;
+        }
+    }
+    noProjects.style.display = hasVisibleProjects || filterItems.length > 0 ? "none" : "block";
 
     // Inicializar com "Home" ativo
     navigationLinks[0].classList.add("active");

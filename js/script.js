@@ -163,3 +163,19 @@ document.addEventListener('mousemove', e => {
     circle.style.left = `${mouseX}px`;
     circle.style.top = `${mouseY}px`;
 });
+
+// Função para calcular a idade dinamicamente
+function calculateAge(birthDate) {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+// Definir a data de nascimento (atualize aqui se mudar)
+const birthDate = "2000-12-11"; // Formato: YYYY-MM-DD, atualize esta linha se a data de nascimento mudar
+document.getElementById("age").textContent = calculateAge(birthDate);
